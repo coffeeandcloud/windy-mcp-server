@@ -28,36 +28,23 @@ Fetch air quality and pollen forecasts for any location.
 
 ## Setup
 
-**Prerequisites:** Python 3.12+, [uv](https://docs.astral.sh/uv/), a [Windy API key](https://api.windy.com/keys)
+**Prerequisites:** [uv](https://docs.astral.sh/uv/), a [Windy API key](https://api.windy.com/keys)
 
-1. Clone the repository and install dependencies:
-   ```bash
-   git clone https://github.com/yourusername/windy-mcp-server.git
-   cd windy-mcp-server
-   uv sync
-   ```
+Add to your MCP client config (e.g. `claude_desktop_config.json`):
 
-2. Create a `.env` file with your API key:
-   ```bash
-   cp .env.example .env
-   # Edit .env and set WINDY_API_KEY=your_api_key_here
-   ```
-
-3. Add to your MCP client config (e.g. `claude_desktop_config.json`):
-   ```json
-   {
-     "mcpServers": {
-       "windy": {
-         "command": "uv",
-         "args": ["run", "python", "server/server.py"],
-         "cwd": "/path/to/windy-mcp-server",
-         "env": {
-           "WINDY_API_KEY": "your_api_key_here"
-         }
-       }
-     }
-   }
-   ```
+```json
+{
+  "mcpServers": {
+    "windy": {
+      "command": "uvx",
+      "args": ["windy-mcp-server"],
+      "env": {
+        "WINDY_API_KEY": "your_api_key_here"
+      }
+    }
+  }
+}
+```
 
 ## License
 
