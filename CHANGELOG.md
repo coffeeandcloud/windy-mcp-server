@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.2.1 (2026-06-01)
+
+
+- docs: Add license file
+- Update publish
+- Merge remote-tracking branch 'refs/remotes/origin/main'
+- fix: Fix broken gh action
+
 ## v0.2.0 (2026-06-01)
 
 
