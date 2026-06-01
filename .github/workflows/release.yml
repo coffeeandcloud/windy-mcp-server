@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump type"
+        required: true
+        default: patch
+        type: choice
+        options: [patch, minor, major]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --group dev
+
+      - name: Bump version
+        run: uv run cz bump --increment ${{ github.event.inputs.bump }} --yes
+
+      - name: Push commit and tag
+        run: git push --follow-tags
+
+      - name: Get version
+        id: meta
+        run: |
+          VERSION=$(uv run cz version --project)
+          echo "version=v${VERSION}" >> "$GITHUB_OUTPUT"
+
+      - name: Extract release notes
+        run: uv run cz changelog --dry-run --incremental > release_notes.md 2>/dev/null || echo "See CHANGELOG.md for details." > release_notes.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.version }}
+          body_path: release_notes.md
+          generate_release_notes: false
