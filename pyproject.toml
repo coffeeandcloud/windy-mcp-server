@@ -9,7 +9,7 @@ description = "Unofficial MCP server for the Windy Point Forecast API"
 readme = "README.md"
 requires-python = ">=3.12"
 authors = [{ name = "Martin Eichinger", email = "dasteini@googlemail.com" }]
-license = { text = "MIT" }
+license = { file = "LICENSE" }
 keywords = ["mcp", "weather", "windy", "forecast", "ai"]
 classifiers = [
     "Programming Language :: Python :: 3",

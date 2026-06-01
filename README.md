@@ -1,6 +1,6 @@
 # windy-mcp-server
 
-> **Unofficial** MCP server for the [Windy Point Forecast API](https://api.windy.com/point-forecast). This project is not affiliated with or endorsed by Windy.com.
+> **Unofficial** MCP server for the [Windy Point Forecast API](https://api.windy.com/point-forecast/docs). This project is not affiliated with or endorsed by Windy.com.
 
 An MCP (Model Context Protocol) server that exposes weather, ocean wave, and air quality forecasts to AI assistants via the Windy Point Forecast API.
 
@@ -61,4 +61,4 @@ Fetch air quality and pollen forecasts for any location.
 
 ## License
 
-MIT
+[MIT](LICENSE)
