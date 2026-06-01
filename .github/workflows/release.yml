@@ -16,6 +16,9 @@ jobs:
     permissions:
       contents: write
 
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -56,3 +59,26 @@ jobs:
           tag_name: ${{ steps.meta.outputs.version }}
           body_path: release_notes.md
           generate_release_notes: false
+
+  publish:
+    needs: release
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.release.outputs.version }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Build package
+        run: uv build
+
+      - name: Publish to PyPI
+        run: uv publish
