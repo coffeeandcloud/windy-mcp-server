@@ -19,6 +19,7 @@ env/
 # Environment / secrets
 .env
 .envrc
+.mcp.json
 
 # Test & coverage
 .pytest_cache/
