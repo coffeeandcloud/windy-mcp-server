@@ -13,9 +13,41 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "commitizen>=4.16.3",
     "pre-commit>=4.2.0",
     "ruff>=0.11.0",
 ]
+
+[tool.commitizen]
+name = "cz_customize"
+version_provider = "pep621"
+tag_format = "v$version"
+update_changelog_on_bump = true
+changelog_file = "CHANGELOG.md"
+
+[tool.commitizen.customize]
+message_template = "{{prefix}}: {{message}}"
+schema_pattern = "(feat|fix|docs|style|refactor|test|chore|build|ci|perf|revert)(\\(.+\\))?!?: .+"
+
+[[tool.commitizen.customize.questions]]
+type = "list"
+name = "prefix"
+message = "Type of change:"
+choices = [
+  {value = "feat",     name = "feat:     a new feature"},
+  {value = "fix",      name = "fix:      a bug fix"},
+  {value = "docs",     name = "docs:     documentation changes"},
+  {value = "refactor", name = "refactor: code restructure without feature or fix"},
+  {value = "test",     name = "test:     add or update tests"},
+  {value = "chore",    name = "chore:    maintenance (deps, tooling, etc.)"},
+  {value = "ci",       name = "ci:       CI/CD changes"},
+  {value = "perf",     name = "perf:     performance improvement"},
+]
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "message"
+message = "Short summary (lower case, no period):"
 
 [tool.ruff]
 target-version = "py312"
