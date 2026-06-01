@@ -1,13 +1,10 @@
 import os
-import sys
 from contextlib import asynccontextmanager
 from datetime import UTC, datetime
 from typing import Literal
 
 from dotenv import load_dotenv
 from fastmcp import Context, FastMCP
-
-sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from client import (
     ForecastRequest,
@@ -271,5 +268,9 @@ async def get_air_quality_forecast(
     return await _call_forecast(client, request, model)
 
 
-if __name__ == "__main__":
+def main():
     mcp.run()
+
+
+if __name__ == "__main__":
+    main()
