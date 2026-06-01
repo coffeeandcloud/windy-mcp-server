@@ -1,6 +1,11 @@
 from .client import WindyClient
 from .enums import Level, Model, Parameter, TempUnit
-from .exceptions import WindyAPIError, WindyBadRequestError, WindyNoContentError, WindyServerError
+from .exceptions import (
+    WindyAPIError,
+    WindyBadRequestError,
+    WindyNoContentError,
+    WindyServerError,
+)
 from .models.request import ForecastRequest
 from .models.response import ForecastResponse, ForecastSeries
 
