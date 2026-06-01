@@ -2,7 +2,12 @@ from types import TracebackType
 
 import httpx
 
-from .exceptions import WindyAPIError, WindyBadRequestError, WindyNoContentError, WindyServerError
+from .exceptions import (
+    WindyAPIError,
+    WindyBadRequestError,
+    WindyNoContentError,
+    WindyServerError,
+)
 from .models.request import ForecastRequest
 from .models.response import ForecastResponse
 
@@ -25,7 +30,7 @@ class WindyClient:
         # Serialize enum values to their string representation
         payload["model"] = request.model.value
         payload["parameters"] = [p.value for p in request.parameters]
-        payload["levels"] = [l.value for l in request.levels]
+        payload["levels"] = [lv.value for lv in request.levels]
         payload["key"] = self._api_key
 
         http = await self._get_http()

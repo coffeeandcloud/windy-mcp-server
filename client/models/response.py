@@ -14,7 +14,9 @@ class ForecastResponse(BaseModel):
     series: list[ForecastSeries]
 
     @classmethod
-    def from_raw(cls, data: dict, temp_unit: TempUnit = TempUnit.kelvin) -> "ForecastResponse":
+    def from_raw(
+        cls, data: dict, temp_unit: TempUnit = TempUnit.kelvin
+    ) -> "ForecastResponse":
         timestamps: list[int] = data["ts"]
         units: dict[str, str | None] = data.get("units", {})
 
