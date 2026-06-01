@@ -1,9 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "windy-mcp-server"
 version = "0.1.0"
-description = "Add your description here"
+description = "Unofficial MCP server for the Windy Point Forecast API"
 readme = "README.md"
 requires-python = ">=3.12"
+authors = [{ name = "Martin Eichinger", email = "dasteini@googlemail.com" }]
+license = { text = "MIT" }
+keywords = ["mcp", "weather", "windy", "forecast", "ai"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+]
 dependencies = [
     "fastmcp>=3.3.1",
     "httpx>=0.28.1",
@@ -11,12 +24,22 @@ dependencies = [
     "python-dotenv>=1.2.2",
 ]
 
+[project.scripts]
+windy-mcp-server = "server.server:main"
+
+[project.urls]
+Homepage = "https://github.com/coffeeandcloud/windy-mcp-server"
+Repository = "https://github.com/coffeeandcloud/windy-mcp-server"
+
 [dependency-groups]
 dev = [
     "commitizen>=4.16.3",
     "pre-commit>=4.2.0",
     "ruff>=0.11.0",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["client", "server"]
 
 [tool.commitizen]
 name = "cz_customize"
